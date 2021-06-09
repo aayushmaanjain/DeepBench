@@ -34,6 +34,10 @@ gemm_stream:
 	$(MKDIR) $(BIN_DIR)
 	$(CUDA_PATH)/bin/$(NVCC) gemm_stream.cu -DUSE_TENSOR_CORES=$(USE_TENSOR_CORES) -DPAD_KERNELS=$(PAD_KERNELS) -o $(BIN_DIR)/gemm_stream -I $(KERNELS_DIR) -I $(CUDA_PATH)/include -L $(BLAS_PATH) -l$(BLAS_LIBRARY) -L $(CUDA_LIB64) -lcurand -lcuda $(NVCC_ARCH_ARGS) -std=c++14
 
+gemm_ctx:
+	$(MKDIR) $(BIN_DIR)
+	$(CUDA_PATH)/bin/$(NVCC) gemm_ctx.cu -DUSE_TENSOR_CORES=$(USE_TENSOR_CORES) -DPAD_KERNELS=$(PAD_KERNELS) -o $(BIN_DIR)/gemm_ctx -I $(KERNELS_DIR) -I $(CUDA_PATH)/include -L $(BLAS_PATH) -l$(BLAS_LIBRARY) -L $(CUDA_LIB64) -lcurand -lcuda $(NVCC_ARCH_ARGS) -std=c++14
+
 conv:
 	$(MKDIR) $(BIN_DIR)
 	$(CUDA_PATH)/bin/$(NVCC) conv_bench.cu -DUSE_TENSOR_CORES=$(USE_TENSOR_CORES) -DPAD_KERNELS=$(PAD_KERNELS) -o $(BIN_DIR)/conv_bench -I $(KERNELS_DIR) -I $(CUDA_PATH)/include -I $(CUDNN_PATH)/include/ -L $(CUDNN_PATH)/lib64/ -L $(CUDA_LIB64) -lcurand -lcudnn $(NVCC_ARCH_ARGS) -std=c++11
